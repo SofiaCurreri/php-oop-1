@@ -19,20 +19,20 @@ class Movie {
     public $title;
     public $year;
     public $poster;
-    public $genre;
+    public $genres;
     public $director;
 
     public function __construct(
         string $_title,
         int $_year,
         string $_poster,
-        string $_genre,
+        array $_genres,
         string $_director = "unknown",
     ){
       $this -> setTitle($_title); 
       $this -> setYear($_year); 
       $this -> setPoster($_poster);
-      $this -> setGenre($_genre);
+      $this -> setGenres($_genres);
       $this -> setDirector($_director);
     }
 
@@ -51,9 +51,13 @@ class Movie {
       $this ->poster = $poster;
     }
 
-    public function setGenre($genre) {
-      if(!is_string($genre) || $genre === "") return false;
-      $this ->genre = $genre;
+    public function setGenres($genres) {
+      $accepted_genres = [];
+
+      foreach($genres as $genre) {
+        if($genre instanceof Genre && is_string($genre->name) && $genre->name !== "") $accepted_genres[] = $genre ;
+      }
+      $this->genres = $accepted_genres;
     }
 
     public function setDirector($director) {
@@ -63,9 +67,36 @@ class Movie {
 
 }
 
+class Genre {
+  public $name;
+
+  public function __construct($_name)
+  {
+    $this->name = $_name;
+  }
+}
+
 $movies = [
-  new Movie("Labyrinth", 1986, "https://i0.wp.com/www.my-sf.com/wp-content/uploads/2016/01/Labyrinth-poster.jpeg", "Fantastico", "Jim Henson"),
-  new Movie("La Città Incantata", 2001, "https://aforismi.meglio.it/img/film/La_citt%C3%A0_incantata.jpg", "Animazione", "Hayao Miyazaki")
+  new Movie(
+    "Labyrinth", 
+    1986, 
+    "https://i0.wp.com/www.my-sf.com/wp-content/uploads/2016/01/Labyrinth-poster.jpeg", 
+    [
+      new Genre("Fantastico"), 
+      new Genre("Avventura")
+    ],  
+    "Jim Henson"
+  ),
+  new Movie(
+    "La Città Incantata", 
+    2001, 
+    "https://aforismi.meglio.it/img/film/La_citt%C3%A0_incantata.jpg", 
+    [
+      new Genre("Animazione"), 
+      new Genre("Fantastico")
+    ],  
+    "Hayao Miyazaki"
+  ),
 ];
 
 foreach($movies as $movie) {
