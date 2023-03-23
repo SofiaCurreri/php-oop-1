@@ -17,18 +17,48 @@
 
 class Movie {
     public $title;
-    public $length;
-    public $rating;
+    public $year;
+    public $poster;
+    public $genre;
+    public $director;
 
-    function __construct(
+    public function __construct(
         string $_title,
-        string $_length,
-        float $_rating
-    )
-    {
-      $this -> title = $_title, 
-      $this -> length = $_length,
-      $this -> rating = $_rating, 
+        int $_year,
+        string $_poster,
+        string $_genre,
+        string $_director = "unknown",
+    ){
+      $this -> setTitle($_title); 
+      $this -> setYear($_year); 
+      $this -> setPoster($_poster);
+      $this -> setGenre($_genre);
+      $this -> setDirector($_director);
+    }
+
+    public function setTitle($title) {
+      if(!is_string($title) || $title === "") return false;
+      $this ->title = $title;
+    }
+
+    public function setYear($year) {
+      if(!is_numeric($year) || $year < 1850 || $year > date("Y")) return false;
+      $this ->year = $year;
+    }
+
+    public function setPoster($poster) {
+      if(!is_string($poster) || $poster === "") return false;
+      $this ->poster = $poster;
+    }
+
+    public function setGenre($genre) {
+      if(!is_string($genre) || $genre === "") return false;
+      $this ->genre = $genre;
+    }
+
+    public function setDirector($director) {
+      if(!is_string($director) || $director === "") return false;
+      $this ->director = $director;
     }
 
 }
