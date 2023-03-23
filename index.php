@@ -63,4 +63,13 @@ class Movie {
 
 }
 
+$movies = [
+  new Movie("Labyrinth", 1986, "https://i0.wp.com/www.my-sf.com/wp-content/uploads/2016/01/Labyrinth-poster.jpeg", "Fantastico", "Jim Henson"),
+  new Movie("La Città Incantata", 2001, "https://aforismi.meglio.it/img/film/La_citt%C3%A0_incantata.jpg", "Animazione", "Hayao Miyazaki")
+];
+
+foreach($movies as $movie) {
+  var_dump($movie);
+}
+
 ?>
