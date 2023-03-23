@@ -17,10 +17,6 @@
 
 require_once __DIR__ . "/data/movies.php";
 
-foreach($movies as $movie) {
-  var_dump($movie);
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -31,9 +27,39 @@ foreach($movies as $movie) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP Primo Esercizio OOP</title>
+
+    <!-- CDN Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
 <body>
+
+    <div class="container">
+        <h1 class="my-4">Movies List</h1>
+
+        <div class="row row-cols-4">
+            <?php foreach($movies as $movie) : ?>
+            <div class="col">
+                <div class="card">
+                    <img src="<?= $movie->poster ?>" class="card-img-top" alt="movie poster" style="height: 26rem;">
+
+                    <div class="card-body">
+                        <h5 class="card-title fs-4"> <?= $movie->title ?> </h5>
+                        <h5 class="card-title "> <?= $movie->director ?> </h5>
+                        <p class="card-text">
+                        <ul>
+                            <?php foreach($movie->genres as $genre) : ?>
+                            <li> <?= $genre->name ?> </li>
+                            <?php endforeach; ?>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
 
 </body>
 
